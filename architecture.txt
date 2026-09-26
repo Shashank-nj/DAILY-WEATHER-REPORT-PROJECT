@@ -1,0 +1,56 @@
+AWS DAILY WEATHER NOTIFICATION BOT
+===================================
+
+
+                    +----------------------+
+                    | EventBridge Scheduler|
+                    +----------+-----------+
+                               |
+                               |
+                               v
+                    +----------------------+
+                    |    AWS Lambda        |
+                    |  Python Application  |
+                    +----------+-----------+
+                               |
+                  +------------+------------+
+                  |                         |
+                  v                         v
+        +----------------+        +----------------+
+        |  Open-Meteo    |        | Amazon Bedrock |
+        |  Weather API   |        | Llama 3 8B     |
+        +-------+--------+        +-------+--------+
+                |                         |
+                +------------+------------+
+                             |
+                             v
+                    +-------------------+
+                    | Final Notification|
+                    +---------+---------+
+                              |
+                              v
+                         +---------+
+                         |  ntfy   |
+                         +----+----+
+                              |
+                              v
+                            Phone
+
+
+Monitoring:
+
+AWS Lambda
+     |
+     v
+CloudWatch Logs
+
+
+Security:
+
+Lambda
+  |
+  +--> IAM Execution Role
+          |
+          +--> CloudWatch Logs
+          |
+          +--> Bedrock InvokeModel
